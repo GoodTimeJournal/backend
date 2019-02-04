@@ -1,7 +1,8 @@
 exports.up = function(knex, Promise) {
 	return knex.schema.createTable('activity', (table) => {
 		table.increments();
-		table.string('name', 128).notNullable().references('id').inTable('users');
+		table.string('name', 128).notNullable();
+		table.integer('fk').notNullable().references('id').inTable('users');
 
 		table.integer('enjoymentLevel').notNullable();
 		table.integer('energyLevel').notNullable();
