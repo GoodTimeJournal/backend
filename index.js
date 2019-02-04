@@ -8,7 +8,7 @@ const cors = require('cors');
 const port = process.env.PORT || 9000;
 // const pg = require('pg');
 require('dotenv').config();
-const environment = process.env.ENVIRONMENT || 'development';
+const environment = process.env.NODE_ENV || 'development';
 
 server.use(helmet(), cors());
 server.use(express.json());
