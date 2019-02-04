@@ -16,28 +16,28 @@ module.exports = {
 		}
 	},
 
-	staging: {
-		client: 'postgresql',
-		connection: {
-			database: 'my_db',
-			user: 'username',
-			password: 'password'
-		},
-		pool: {
-			min: 2,
-			max: 10
-		},
-		migrations: {
-			tableName: 'knex_migrations'
-		}
-	},
+	// staging: {
+	// 	client: 'postgresql',
+	// 	connection: {
+	// 		database: 'my_db',
+	// 		user: 'username',
+	// 		password: 'password'
+	// 	},
+	// 	pool: {
+	// 		min: 2,
+	// 		max: 10
+	// 	},
+	// 	migrations: {
+	// 		tableName: 'knex_migrations'
+	// 	}
+	// },
 
 	production: {
-		client: 'postgresql',
+		client: 'pg',
 		connection: {
-			database: process.env.DATABASE_URL,
-			user: 'username',
-			password: 'password'
+			database: process.env.DATABASE_URL
+			// user: 'username',
+			// password: 'password'
 		},
 		pool: {
 			min: 2,
@@ -46,6 +46,8 @@ module.exports = {
 		migrations: {
 			directory: './data/migrations',
 			tableName: 'knex_migrations'
-		}
+		},
+		useNullAsDefault: true,
+		ssl: true
 	}
 };
