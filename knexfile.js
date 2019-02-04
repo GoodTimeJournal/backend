@@ -1,6 +1,8 @@
 require('dotenv').config();
 // Update with your config settings.
 
+const dbConnection = process.env.DATABASE_URL;
+
 module.exports = {
 	development: {
 		client: 'sqlite3',
@@ -34,11 +36,7 @@ module.exports = {
 
 	production: {
 		client: 'pg',
-		connection: {
-			database: process.env.DATABASE_URL + `?ssl=true`
-			// user: 'username',
-			// password: 'password'
-		},
+		connection: dbConnection,
 		pool: {
 			min: 2,
 			max: 10
