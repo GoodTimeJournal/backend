@@ -9,7 +9,6 @@ const db = knex(knexConfig.development);
 const cors = require('cors');
 const port = process.env.PORT || 9000;
 // const pg = require('pg');
-const environment = process.env.NODE_ENV || 'development';
 
 server.use(helmet(), cors());
 server.use(express.json());
