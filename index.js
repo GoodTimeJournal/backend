@@ -6,7 +6,7 @@ const knexConfig = require('./knexfile.js');
 const db = knex(knexConfig.development);
 const cors = require('cors');
 const port = process.env.PORT || 9000;
-const pg = require('pg');
+// const pg = require('pg');
 require('dotenv').config();
 const environment = process.env.ENVIRONMENT || 'development';
 
@@ -14,9 +14,7 @@ server.use(helmet(), cors());
 server.use(express.json());
 
 server.get('/', (req, res) => {
-	pg.connect(process.env.DATABASE_URL, () => {
-		res.status(200).send('Hi!');
-	});
+	res.status(200).send('Hi!');
 });
 
 server.listen(port, () => {
