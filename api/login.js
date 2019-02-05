@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const db = require('../data/helper/userModal');
-const { authenticate, generateToken } = require('../auth/auth');
+const { generateToken } = require('../auth/auth');
 
 router.post('/register', (req, res) => {
 	const creds = req.body;

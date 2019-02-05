@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
 		table.increments();
 
 		table.string('username', 32).notNullable().unique();
-		table.string('password', 32).notNullable();
+		table.string('password', 128).notNullable();
 		table.binary('avatar');
 	});
 };
