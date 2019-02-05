@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
 	const activity = req.body;
 	db
-		.insert(activity)
+		.createActivity(activity)
 		.then((activity) => {
 			res.status(201).json(activity);
 		})
@@ -56,7 +56,7 @@ router.put('/:id', (req, res) => {
 	const edit = { name, fk, energyLevel, enjoymentLevel, engagement };
 
 	db
-		.update(id, edit)
+		.editActivity(id, edit)
 		.then((edit) => {
 			if (edit) {
 				res.status(200).json({

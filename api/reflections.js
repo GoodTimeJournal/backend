@@ -25,11 +25,12 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+	const { week, fk, journalEntry, insights, trends, surprises } = req.body;
 	const reflection = req.body;
 	db
-		.insert(reflection)
+		.createReflection(reflection)
 		.then((reflection) => {
-			res.status(201).json(reflection);
+			res.status(201).json({ reflection: reflection });
 		})
 		.catch((err) => {
 			res.status(500).json(`Server error: ${err}`);
@@ -56,7 +57,7 @@ router.put('/:id', (req, res) => {
 	const edit = { week, fk, journalEntry, insights, trends, surprises };
 
 	db
-		.update(id, edit)
+		.editReflection(id, edit)
 		.then((edit) => {
 			if (edit) {
 				res.status(200).json({
