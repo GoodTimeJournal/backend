@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
 					res.status(201).json({ username: user.username, token });
 				})
 				.catch((err) => {
-					res.status(500).json({ hi: err });
+					res.status(500).json({ err });
 				});
 		})
 		.catch((err) => {
