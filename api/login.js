@@ -30,11 +30,12 @@ router.post('/register', (req, res) => {
 		});
 });
 
-router.post('/login', authenticate, (req, res) => {
+router.post('/login', (req, res) => {
 	const creds = req.body;
 	db
 		.findUserName(creds.username)
 		.then((user) => {
+			console.log(user);
 			if (user && bcrypt.compareSync(creds.password, user.password)) {
 				const token = generateToken(user);
 				res.json({ Welcome: user.username, token });
