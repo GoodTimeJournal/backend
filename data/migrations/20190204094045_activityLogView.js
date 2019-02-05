@@ -3,7 +3,6 @@ exports.up = function(knex, Promise) {
 		table.increments();
 		table.string('name', 128).notNullable();
 		table.integer('fk').notNullable().references('id').inTable('users');
-
 		table.integer('enjoymentLevel').notNullable();
 		table.integer('energyLevel').notNullable();
 		table.text('engagement').notNullable();

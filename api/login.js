@@ -8,7 +8,7 @@ router.post('/register', (req, res) => {
 	const creds = req.body;
 	const hash = bcrypt.hashSync(creds.password, 14);
 	creds.password = hash;
-	// console.log(creds);
+	console.log(hash);
 	db
 		.createUser(creds)
 		.then((id) => {
@@ -16,6 +16,7 @@ router.post('/register', (req, res) => {
 			db
 				.findUserId(id[0])
 				.then((user) => {
+					console.log(user);
 					console.log(user);
 					const token = generateToken(user);
 					console.log(token);
@@ -26,7 +27,7 @@ router.post('/register', (req, res) => {
 				});
 		})
 		.catch((err) => {
-			res.status(500).json(err);
+			res.status(500).json({ err });
 		});
 });
 
