@@ -1,9 +1,10 @@
 // const db = knex(knexConfig.development)
 
-// server.get('/register', (req, res) => {
-// 	res.status(200).send('Register here');
+// server.post('/register', (req, res) => {
+// 	const { name, password } = req.body;
+// 	db.create(users)
 // });
 
-// server.get('/login', (req, res) => {
+// server.post('/login', (req, res) => {
 // 	res.status(200).send('Login here');
 // });
