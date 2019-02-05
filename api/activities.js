@@ -1,14 +1,13 @@
 const router = express();
-const db = knex(knexConfig.development);
+const db = knex(knexConfig.production);
 
 router.get('/activities', (req, res) => {
-	db.activities
-		.find()
-		.then((notes) => {
-			if (notes.length) {
-				res.status(200).json(notes);
+	db(activities)
+		.then((activities) => {
+			if (activities.length) {
+				res.status(200).json(activities);
 			} else {
-				res.status(200).json({ message: 'No activities found' });
+				res.status(404).json({ message: 'No activities found' });
 			}
 		})
 		.catch((err) => res.status(500).json(`Server error: ${err}`));
@@ -16,8 +15,9 @@ router.get('/activities', (req, res) => {
 
 router.get('/activities/:id', (req, res) => {
 	const { id } = req.params;
-	db.activities
-		.find(id)
+	db(activities)
+		.where({ id })
+		.first()
 		.then((activity) => {
 			if (activity) {
 				res.status(200).json(activity);
@@ -33,7 +33,8 @@ router.get('/activities/:id', (req, res) => {
 router.post('/activities', (req, res) => {
 	const activity = req.body;
 	db
-		.create(activity)
+		.insert(activity)
+		.into(activities)
 		.then((activities) => {
 			res.status(201).json({ message: 'Activity created', id: activities[0] });
 		})
@@ -44,8 +45,9 @@ router.post('/activities', (req, res) => {
 
 router.delete('/activities/:id', (req, res) => {
 	const { id } = req.params;
-	db
-		.delete(id)
+	db('activites')
+		.where({ id })
+		.del()
 		.then((res) => {
 			if (res) {
 				res.status(200).json({ message: 'Activity deleted' });
@@ -60,11 +62,12 @@ router.put('/activities/:id', (req, res) => {
 	const { id } = req.params;
 	const activity = req.body;
 
-	db
-		.activities(id, activity)
-		.then((res) => {
-			if (res) {
-				res.status(200).json({ message: 'Activity updated ', activity: { ...req.body, _id: id } });
+	db('activities')
+		.where({ id })
+		.update(activity)
+		.then((activities) => {
+			if (activities) {
+				res.status(200).json({ message: 'Activity updated ', activity: { ...req.body, id: id } });
 			} else {
 				res.status(404).json({ errorMessage: 'That activity seems to be missing!' });
 			}
