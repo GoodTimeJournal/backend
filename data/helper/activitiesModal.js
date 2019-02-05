@@ -13,25 +13,17 @@ function getActivities() {
 }
 
 function getActivity(id) {
-	return db('activity')
-		.where({ id })
-		.first();
+	return db('activity').where({ id }).first();
 }
 
 function createActivity(activity) {
-	return db('activity')
-		.insert(activity)
-		.into('activity');
+	return db('activity').insert(activity).into('activity');
 }
 
 function deleteActivity(id) {
-	return db('activity')
-		.where({ id })
-		.del();
+	return db('activity').where({ id }).del();
 }
 
 function editActivity(id, activity) {
-	return db('activity')
-		.where({ id })
-		.update(activity);
+	return db('activity').where({ id }).update(activity);
 }

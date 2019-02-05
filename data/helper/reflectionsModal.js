@@ -4,26 +4,26 @@ module.exports = {
 	getReflections,
 	createReflection,
 	deleteReflection,
-	getAReflection,
+	getReflection,
 	editReflection
 };
 
 function getReflections() {
-	return db('reflections');
+	return db('reflection');
 }
 
 function getReflection(id) {
-	return db('reflections').where({ _id: id }).first();
+	return db('reflection').where({ id }).first();
 }
 
 function createReflection(reflection) {
-	return db('reflections').insert(reflection, '_id').into('reflections');
+	return db('reflection').insert(reflection).into('reflection');
 }
 
 function deleteReflection(id) {
-	return db('reflections').where({ _id: id }).del();
+	return db('reflection').where({ id }).del();
 }
 
 function editReflection(id, reflection) {
-	return db('reflections').where({ _id: id }).update(reflection);
+	return db('reflection').where({ id }).update(reflection);
 }
