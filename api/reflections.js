@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../data/helper/reflectionsModal');
+const { authenticate } = require('../auth/auth');
 
-router.get('/', (req, res) => {
+router.get('/', authenticate, (req, res) => {
 	db.getReflections().then((reflections) => res.status(200).json(reflections)).catch((err) => {
 		res.status(500).json(`Server error: ${err}`);
 	});
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
 	db
 		.getReflection(id)
@@ -24,7 +25,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
 	const { week, fk, journalEntry, insights, trends, surprises } = req.body;
 	const reflection = req.body;
 	db
@@ -37,7 +38,7 @@ router.post('/', (req, res) => {
 		});
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
 	db
 		.deleteReflection(id)
@@ -53,7 +54,7 @@ router.delete('/:id', (req, res) => {
 		});
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
 	const { week, fk, journalEntry, insights, trends, surprises } = req.body;
 	const edit = { week, fk, journalEntry, insights, trends, surprises };

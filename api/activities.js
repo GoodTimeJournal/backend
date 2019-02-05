@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../data/helper/activitiesModal');
+const { authenticate } = require('../auth/auth');
 
-router.get('/', (req, res) => {
+router.get('/', authenticate, (req, res) => {
 	db.getActivities().then((activities) => res.status(200).json(activities)).catch((err) => {
 		res.status(500).json(`Server error: ${err}`);
 	});
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
 	db
 		.getActivity(id)
@@ -24,7 +25,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
 	const activity = req.body;
 	db
 		.createActivity(activity)
@@ -36,7 +37,7 @@ router.post('/', (req, res) => {
 		});
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
 	db
 		.deleteActivity(id)
@@ -50,7 +51,7 @@ router.delete('/:id', (req, res) => {
 		.catch((err) => res.status(500).json(`Server error: ${err}`));
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
 	const { name, fk, energyLevel, enjoymentLevel, engagement } = req.body;
 	const edit = { name, fk, energyLevel, enjoymentLevel, engagement };
