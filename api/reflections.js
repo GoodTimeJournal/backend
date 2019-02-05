@@ -1,13 +1,13 @@
 const router = express();
+const db = knex(knexConfig.production);
 
 router.get('/reflections', (req, res) => {
-	reflections
-		.find()
-		.then((notes) => {
-			if (notes.length) {
-				res.status(200).json(notes);
+	db('reflections')
+		.then((reflections) => {
+			if (reflections.length) {
+				res.status(200).json(reflections);
 			} else {
-				res.status(200).json({ message: 'No reflections found' });
+				res.status(404).json({ message: 'No reflections found' });
 			}
 		})
 		.catch((err) => res.status(500).json(`Server error: ${err}`));
@@ -15,8 +15,9 @@ router.get('/reflections', (req, res) => {
 
 router.get('/reflections/:id', (req, res) => {
 	const { id } = req.params;
-	db
-		.reflections(id)
+	db('reflections')
+		.where({ id })
+		.first()
 		.then((reflection) => {
 			if (reflection) {
 				res.status(200).json(reflection);
@@ -32,7 +33,8 @@ router.get('/reflections/:id', (req, res) => {
 router.post('/reflections', (req, res) => {
 	const reflection = req.body;
 	db
-		.create(reflection)
+		.insert(reflection)
+		.into('reflections')
 		.then((reflections) => {
 			res.status(201).json({ message: 'Reflection created', id: reflections[0] });
 		})
@@ -43,8 +45,9 @@ router.post('/reflections', (req, res) => {
 
 router.delete('/reflections/:id', (req, res) => {
 	const { id } = req.params;
-	db
-		.delete(id)
+	db('reflections')
+		.where({ id })
+		.del()
 		.then((res) => {
 			if (res) {
 				res.status(200).json({ message: 'Reflection deleted' });
@@ -59,11 +62,12 @@ router.put('/reflections/:id', (req, res) => {
 	const { id } = req.params;
 	const reflection = req.body;
 
-	db
-		.reflections(id, reflection)
+	db('reflections')
+		.where({ id })
+		.update(reflection)
 		.then((res) => {
 			if (res) {
-				res.status(200).json({ message: 'Reflection updated ', reflection: { ...req.body, _id: id } });
+				res.status(200).json({ message: 'Reflection updated ', reflection: { ...req.body, id: id } });
 			} else {
 				res.status(404).json({ errorMessage: 'That reflection seems to be missing!' });
 			}
