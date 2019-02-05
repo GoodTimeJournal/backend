@@ -40,8 +40,8 @@ router.delete('/:id', (req, res) => {
 	const { id } = req.params;
 	db
 		.deleteActivity(id)
-		.then((res) => {
-			if (res) {
+		.then((activity) => {
+			if (activity) {
 				res.status(202).json({ message: 'Activity deleted' });
 			} else {
 				res.status(404).json({ errorMessage: 'That activity seems to be missing!' });

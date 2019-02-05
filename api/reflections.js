@@ -41,14 +41,16 @@ router.delete('/:id', (req, res) => {
 	const { id } = req.params;
 	db
 		.deleteReflection(id)
-		.then((res) => {
-			if (res) {
+		.then((activity) => {
+			if (activity) {
 				res.status(202).json({ message: 'Reflection deleted' });
 			} else {
 				res.status(404).json({ errorMessage: 'That reflection seems to be missing!' });
 			}
 		})
-		.catch((err) => res.status(500).json(`Server error: ${err}`));
+		.catch((err) => {
+			res.status(500).json(`Server error: ${err}`);
+		});
 });
 
 router.put('/:id', (req, res) => {
