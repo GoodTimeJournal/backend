@@ -38,6 +38,7 @@ router.post('/login', (req, res) => {
 			console.log(user);
 			if (user && bcrypt.compareSync(creds.password, user.password)) {
 				const token = generateToken(user);
+				console.log(token);
 				res.json({ Welcome: user.username, token });
 			} else {
 				res.status(401).json({ message: 'Not Authorized' });
