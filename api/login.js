@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
 		.then((id) => {
 			console.log(id);
 			db
-				.findUserId(id)
+				.findUserId(id[0])
 				.then((user) => {
 					console.log(user);
 					const token = generateToken(user);
