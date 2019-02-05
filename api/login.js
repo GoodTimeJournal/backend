@@ -5,6 +5,7 @@
 // 	db.create(users)
 // });
 
-// server.post('/login', (req, res) => {
-// 	res.status(200).send('Login here');
-// });
+server.post('/login', (req, res) => {
+	const { username } = req.body;
+	res.status(200).send('Login here');
+});

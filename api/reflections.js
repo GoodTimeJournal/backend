@@ -1,5 +1,5 @@
+const express = require('express');
 const router = express();
-const db = knex(knexConfig.production);
 
 router.get('/reflections', (req, res) => {
 	db('reflections')

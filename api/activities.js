@@ -1,16 +1,21 @@
+const express = require('express');
 const router = express();
-const db = knex(knexConfig.production);
+const db = require('../data/helper/activitiesModal');
+
+// router.get('/activities', (req, res) => {
+// 	db(activities)
+// 		.then((activities) => {
+// 			if (activities.length) {
+// 				res.status(200).json(activities);
+// 			} else {
+// 				res.status(404).json({ message: 'No activities found' });
+// 			}
+// 		})
+// 		.catch((err) => res.status(500).json(`Server error: ${err}`));
+// });
 
 router.get('/activities', (req, res) => {
-	db(activities)
-		.then((activities) => {
-			if (activities.length) {
-				res.status(200).json(activities);
-			} else {
-				res.status(404).json({ message: 'No activities found' });
-			}
-		})
-		.catch((err) => res.status(500).json(`Server error: ${err}`));
+	res.status(200).send('hi');
 });
 
 router.get('/activities/:id', (req, res) => {
