@@ -10,8 +10,8 @@ router.post('/register', (req, res) => {
 	creds.password = hash;
 	db
 		.createUser(creds)
-		.then((id) => {
-			console.log(id);
+		.then((res) => {
+			console.log(res);
 			db
 				.findUserId(id[0])
 				.then((user) => {
