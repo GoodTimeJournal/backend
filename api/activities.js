@@ -62,8 +62,8 @@ router.delete('/:id', authenticate, (req, res) => {
 
 router.put('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
-	const { name, fk, energyLevel, enjoymentLevel, engagement } = req.body;
-	const edit = { name, fk, energyLevel, enjoymentLevel, engagement };
+	const { name, fk, energyLevel, enjoymentRating, engagement } = req.body;
+	const edit = { name, fk, energyLevel, enjoymentRating, engagement };
 
 	db
 		.editActivity(id, edit)
