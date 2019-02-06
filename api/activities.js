@@ -38,7 +38,7 @@ router.post('/', authenticate, (req, res) => {
 	const activity = req.body;
 	db
 		.createActivity(activity)
-		.then((activity) => {
+		.then((act) => {
 			res.status(201).json(activity);
 		})
 		.catch((err) => {
