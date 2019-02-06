@@ -6,8 +6,8 @@ const { generateToken } = require('../auth/auth');
 
 router.post('/register', (req, res) => {
 	const creds = req.body;
-	// const hash = bcrypt.hashSync(creds.password, 14);
-	// creds.password = hash;
+	const hash = bcrypt.hashSync(creds.password, 14);
+	creds.password = hash;
 	db
 		.createUser(creds)
 		.then((res) => {
