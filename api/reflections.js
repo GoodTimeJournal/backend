@@ -27,7 +27,7 @@ router.get('/:id', authenticate, (req, res) => {
 
 router.post('/', authenticate, (req, res) => {
 	const { week, fk, journalEntry, insights, trends, surprises } = req.body;
-	const reflection = req.body;
+	const reflection = { week, fk, journalEntry, insights, trends, surprises };
 	db
 		.createReflection(reflection)
 		.then((reflection) => {
