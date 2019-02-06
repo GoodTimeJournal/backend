@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const db = require('../data/helper/reflectionsModal');
 const { authenticate } = require('../auth/auth');
+const userDB = require('../data/helper/userModal');
 
 router.get('/', authenticate, (req, res) => {
-	db
-		.getReflections()
+	// console.log(userDB.returnId(req.decoded.username));
+	userDB
+		.findUserName(req.decoded.username)
+		.then((res) => db.getReflections(res.id))
 		.then((reflections) => {
 			console.log(req.decoded);
 			res.status(200).json(reflections);
