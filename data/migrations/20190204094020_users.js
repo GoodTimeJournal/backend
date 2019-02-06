@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
 		table.string('email', 32).notNullable();
 		table.string('username', 32).notNullable().unique();
 		table.string('password', 128).notNullable();
-		table.binary('avatar');
+		table.string('avatar');
 	});
 };
 
