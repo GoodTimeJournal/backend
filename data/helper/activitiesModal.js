@@ -8,8 +8,8 @@ module.exports = {
 	editActivity
 };
 
-function getActivities() {
-	return db('activity');
+function getActivities(id) {
+	return db('activity').then((res) => res.filter((act) => act.fk == id));
 }
 
 function getActivity(id) {

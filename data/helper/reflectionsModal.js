@@ -8,8 +8,8 @@ module.exports = {
 	editReflection
 };
 
-function getReflections() {
-	return db('reflection');
+function getReflections(id) {
+	return db('reflection').then((res) => res.filter((act) => act.fk == id));
 }
 
 function getReflection(id) {

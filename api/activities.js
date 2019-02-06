@@ -2,11 +2,16 @@ const express = require('express');
 const router = express.Router();
 const db = require('../data/helper/activitiesModal');
 const { authenticate } = require('../auth/auth');
+const userDB = require('../data/helper/userModal');
 
 router.get('/', authenticate, (req, res) => {
-	db.getActivities().then((activities) => res.status(200).json(activities)).catch((err) => {
-		res.status(500).json(`Server error: ${err}`);
-	});
+	userDB
+		.findUserName(req.decoded.username)
+		.then((res) => db.getActivities(res.id))
+		.then((activities) => res.status(200).json(activities))
+		.catch((err) => {
+			res.status(500).json(`Server error: ${err}`);
+		});
 });
 
 router.get('/:id', authenticate, (req, res) => {
@@ -14,11 +19,15 @@ router.get('/:id', authenticate, (req, res) => {
 	db
 		.getActivity(id)
 		.then((activity) => {
+			// if (activity.fk !== req.decoded.username) {
+			// 	res.status(401).json({ Error: 'This is not your activity' });
+			// } else {
 			if (activity) {
 				res.status(200).json(activity);
 			} else {
 				res.status(404).json({ error: 'Activity not found' });
 			}
+			// }
 		})
 		.catch((err) => {
 			res.status(500).json(`Server error: ${err}`);

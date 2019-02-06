@@ -4,7 +4,8 @@ module.exports = {
 	createUser,
 	findUserId,
 	findUserName,
-	getUsers
+	getUsers,
+	returnId
 };
 
 function createUser(user) {
@@ -22,3 +23,9 @@ function findUserId(id) {
 function getUsers() {
 	return db('users');
 }
+
+// function returnId(username) {
+// 	return db('users').where({ username }).then((res) => {
+// 		return findUserName(res.username);
+// 	});
+// }
