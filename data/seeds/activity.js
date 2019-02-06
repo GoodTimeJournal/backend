@@ -9,8 +9,7 @@ exports.seed = function(knex, Promise) {
 				enjoymentRating: 4,
 				energyLevel: 3,
 				engagement: 4,
-				timestamp: '02/2 06:15 pm',
-				id: 66
+				timestamp: '02/2 06:15 pm'
 			},
 			{
 				name: 'Journaling',
@@ -18,8 +17,7 @@ exports.seed = function(knex, Promise) {
 				enjoymentRating: 4,
 				energyLevel: 4,
 				engagement: 5,
-				timestamp: '01/30 02:05 pm',
-				id: 25
+				timestamp: '01/30 02:05 pm'
 			},
 			{
 				name: 'TV',
@@ -27,8 +25,7 @@ exports.seed = function(knex, Promise) {
 				enjoymentRating: 3,
 				energyLevel: 2,
 				engagement: 2,
-				timestamp: '01/28 09:20 pm',
-				id: 266
+				timestamp: '01/28 09:20 pm'
 			},
 			{
 				name: 'Biking',
@@ -36,8 +33,7 @@ exports.seed = function(knex, Promise) {
 				enjoymentRating: 3,
 				energyLevel: 3,
 				engagement: 3,
-				timestamp: '01/23 04:45 pm',
-				id: 26634
+				timestamp: '01/23 04:45 pm'
 			},
 			{
 				name: 'Swimming',
@@ -45,8 +41,7 @@ exports.seed = function(knex, Promise) {
 				enjoymentRating: 4,
 				energyLevel: 5,
 				engagement: 5,
-				timestamp: '01/13 12:45 pm',
-				id: 26543
+				timestamp: '01/13 12:45 pm'
 			},
 			{
 				name: 'Running',
@@ -54,8 +49,7 @@ exports.seed = function(knex, Promise) {
 				enjoymentRating: 2,
 				energyLevel: 3,
 				engagement: 4,
-				timestamp: '02/2 06:15 pm',
-				id: 6611
+				timestamp: '02/2 06:15 pm'
 			},
 			{
 				name: 'TV',
@@ -63,8 +57,7 @@ exports.seed = function(knex, Promise) {
 				enjoymentRating: 3,
 				energyLevel: 2,
 				engagement: 4,
-				timestamp: '01/28 09:20 pm',
-				id: 26611
+				timestamp: '01/28 09:20 pm'
 			}
 		]);
 	});
