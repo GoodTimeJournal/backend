@@ -3,7 +3,8 @@ const db = require('../../knex');
 module.exports = {
 	createUser,
 	findUserId,
-	findUserName
+	findUserName,
+	getUsers
 };
 
 function createUser(user) {
@@ -16,4 +17,8 @@ function findUserName(username) {
 
 function findUserId(id) {
 	return db('users').where({ id }).first();
+}
+
+function getUsers() {
+	return db('users');
 }
