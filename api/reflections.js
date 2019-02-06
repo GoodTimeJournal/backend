@@ -39,7 +39,7 @@ router.post('/', authenticate, (req, res) => {
 	const reflection = { week, fk, journalEntry, insights, trends, surprises };
 	db
 		.createReflection(reflection)
-		.then((reflection) => {
+		.then((res) => {
 			res.status(201).json({ reflection: reflection });
 		})
 		.catch((err) => {
