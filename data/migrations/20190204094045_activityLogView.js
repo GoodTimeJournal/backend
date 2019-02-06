@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
 		table.integer('fk').notNullable().references('id').inTable('users');
 		table.integer('enjoymentLevel').notNullable();
 		table.integer('energyLevel').notNullable();
-		table.text('engagement').notNullable();
+		table.integer('engagement').notNullable();
 		table.timestamp('timestamp').defaultTo(knex.fn.now());
 	});
 };
