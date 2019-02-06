@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../data/helper/usersModal');
+const db = require('../data/helper/userModal');
 const { authenticate } = require('../auth/auth');
 
 router.get('/users', authenticate, (req, res) => {
