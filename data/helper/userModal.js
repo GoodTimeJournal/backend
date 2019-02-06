@@ -4,8 +4,8 @@ module.exports = {
 	createUser,
 	findUserId,
 	findUserName,
-	getUsers,
-	returnId
+	getUsers
+	// returnId
 };
 
 function createUser(user) {
