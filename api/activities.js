@@ -19,22 +19,18 @@ router.get('/:id', authenticate, (req, res) => {
 	db
 		.getActivity(id)
 		.then((activity) => {
-			// if (activity.fk !== req.decoded.username) {
-			// 	res.status(401).json({ Error: 'This is not your activity' });
-			// } else {
 			if (activity) {
 				res.status(200).json(activity);
 			} else {
 				res.status(404).json({ error: 'Activity not found' });
 			}
-			// }
 		})
 		.catch((err) => {
 			res.status(500).json(`Server error: ${err}`);
 		});
 });
 
-router.post('/', authenticate, (req, res) => {
+router.post('/', authenticate, (req, res, next) => {
 	const activity = req.body;
 	db
 		.createActivity(activity)
@@ -49,7 +45,7 @@ router.post('/', authenticate, (req, res) => {
 				});
 		})
 		.catch((err) => {
-			res.status(500).json({ err });
+			next('h500', err);
 		});
 });
 
@@ -67,7 +63,7 @@ router.delete('/:id', authenticate, (req, res) => {
 		.catch((err) => res.status(500).json(`Server error: ${err}`));
 });
 
-router.put('/:id', authenticate, (req, res) => {
+router.put('/:id', authenticate, (req, res, next) => {
 	const { id } = req.params;
 	const { name, fk, energyLevel, enjoymentRating, engagement } = req.body;
 	const edit = { name, fk, energyLevel, enjoymentRating, engagement };
@@ -83,7 +79,9 @@ router.put('/:id', authenticate, (req, res) => {
 				res.status(404).json({ errorMessage: 'That activity seems to be missing!' });
 			}
 		})
-		.catch((err) => res.status(500).json(`Server error: ${err}`));
+		.catch((err) => {
+			next('h500', err);
+		});
 });
 
 module.exports = router;

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../data/helper/userModal');
 const { generateToken } = require('../auth/auth');
 
-router.post('/register', (req, res) => {
+router.post('/register', (req, res, next) => {
 	const creds = req.body;
 	const hash = bcrypt.hashSync(creds.password, 14);
 	creds.password = hash;
@@ -22,11 +22,11 @@ router.post('/register', (req, res) => {
 				});
 		})
 		.catch((err) => {
-			res.status(500).json({ err });
+			next('h500', err);
 		});
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
 	const creds = req.body;
 	db
 		.findUserName(creds.username)
@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
 			}
 		})
 		.catch((err) => {
-			res.status(500).json(err);
+			next('h500', err);
 		});
 });
 

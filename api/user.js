@@ -9,7 +9,7 @@ router.get('/users', authenticate, (req, res) => {
 			res.status(500).json(`Server error: ${err}`);
 		});
 	} else {
-		res.status(500).json({ error: 'You do not have rights to this endpoint' });
+		res.status(401).json({ error: 'You do not have rights to this endpoint' });
 	}
 });
 

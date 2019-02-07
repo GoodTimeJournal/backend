@@ -3,14 +3,13 @@ const router = express.Router();
 const db = require('../data/helper/reflectionsModal');
 const { authenticate } = require('../auth/auth');
 const userDB = require('../data/helper/userModal');
+const errorHandler = require('../errorHandler/errors.js');
 
 router.get('/', authenticate, (req, res) => {
-	// console.log(userDB.returnId(req.decoded.username));
 	userDB
 		.findUserName(req.decoded.username)
 		.then((res) => db.getReflections(res.id))
 		.then((reflections) => {
-			console.log(req.decoded);
 			res.status(200).json(reflections);
 		})
 		.catch((err) => {
@@ -34,7 +33,7 @@ router.get('/:id', authenticate, (req, res) => {
 		});
 });
 
-router.post('/', authenticate, (req, res) => {
+router.post('/', authenticate, (req, res, next) => {
 	const { week, fk, journalEntry, insights, trends, surprises } = req.body;
 	const reflection = { week, fk, journalEntry, insights, trends, surprises };
 	db
@@ -50,7 +49,7 @@ router.post('/', authenticate, (req, res) => {
 				});
 		})
 		.catch((err) => {
-			res.status(500).json({ err });
+			next('h500', err);
 		});
 });
 
@@ -70,24 +69,24 @@ router.delete('/:id', authenticate, (req, res) => {
 		});
 });
 
-router.put('/:id', authenticate, (req, res) => {
+router.put('/:id', authenticate, (req, res, next) => {
 	const { id } = req.params;
 	const { week, fk, journalEntry, insights, trends, surprises } = req.body;
 	const edit = { week, fk, journalEntry, insights, trends, surprises };
-
 	db
 		.editReflection(id, edit)
-		.then((ids) => {
-			if (ids[0]) {
+		.then((updated) => {
+			if (updated) {
 				res.status(200).json({
-					message: 'Reflection updated ',
-					reflection: ids[0]
+					message: 'Reflection updated'
 				});
 			} else {
 				res.status(404).json({ errorMessage: 'That reflection seems to be missing!' });
 			}
 		})
-		.catch((err) => res.status(500).json(`Server error: ${err}`));
+		.catch((err) => {
+			next('h500', err);
+		});
 });
 
 module.exports = router;
