@@ -9,7 +9,7 @@ module.exports = {
 };
 
 function createUser(user) {
-	return db('users').insert(user).into('users').returning('user');
+	return db('users').insert(user).into('users').returning('users');
 }
 
 function findUserName(username) {
