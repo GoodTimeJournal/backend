@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
 		table.increments();
 		table.string('week', 32).notNullable();
 		table.integer('fk').notNullable().references('id').inTable('users');
-		table.string('journalEntry').notNullable();
+		table.text('journalEntry').notNullable();
 		table.text('insights').notNullable();
 		table.text('trends').notNullable();
 		table.text('surprises').notNullable();
