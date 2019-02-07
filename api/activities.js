@@ -71,14 +71,13 @@ router.put('/:id', authenticate, (req, res) => {
 	const { id } = req.params;
 	const { name, fk, energyLevel, enjoymentRating, engagement } = req.body;
 	const edit = { name, fk, energyLevel, enjoymentRating, engagement };
-
 	db
 		.editActivity(id, edit)
-		.then((edit) => {
-			if (edit) {
+		.then((ids) => {
+			if (ids) {
 				res.status(200).json({
 					message: 'Activity updated ',
-					activity: edit
+					activity: ids[0]
 				});
 			} else {
 				res.status(404).json({ errorMessage: 'That activity seems to be missing!' });

@@ -25,5 +25,5 @@ function deleteActivity(id) {
 }
 
 function editActivity(id, activity) {
-	return db('activity').where({ id }).update(activity);
+	return db('activity').where({ id }).update(activity, 'id');
 }
