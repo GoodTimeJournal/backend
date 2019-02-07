@@ -10,21 +10,18 @@ router.post('/register', (req, res) => {
 	creds.password = hash;
 	db
 		.createUser(creds)
-		.then((res) => {
-			res.status(202).json(creds);
-			// db
-			// 	.findUserId(id[0])
-			// 	.then((user) => {
-			// 		console.log(user);
-			// 		const token = generateToken(user);
-			// 		res.status(201).json({ username: user.username, token });
-			// 	})
-			// 	.catch((err) => {
-			// 		res.status(500).json({ err });
-			// 	});
+		.then((ids) => {
+			db
+				.findUserId(ids[0])
+				.then((user) => {
+					res.status(201).json({ username: user.username });
+				})
+				.catch((err) => {
+					res.status(500).json({ err });
+				});
 		})
 		.catch((err) => {
-			res.status(500).send('this is an error');
+			res.status(500).json({ err });
 		});
 });
 
