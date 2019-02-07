@@ -39,11 +39,18 @@ router.post('/', authenticate, (req, res) => {
 	const reflection = { week, fk, journalEntry, insights, trends, surprises };
 	db
 		.createReflection(reflection)
-		.then((ref) => {
-			res.status(201).json({ reflection: reflection });
+		.then((ids) => {
+			db
+				.getReflection(ids[0])
+				.then((user) => {
+					res.status(201).json({ reflection: reflection.id });
+				})
+				.catch((err) => {
+					res.status(500).json(`Server error: ${err}`);
+				});
 		})
 		.catch((err) => {
-			res.status(500).json(`Server error: ${err}`);
+			res.status(500).json({ err });
 		});
 });
 

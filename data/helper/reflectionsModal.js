@@ -17,7 +17,7 @@ function getReflection(id) {
 }
 
 function createReflection(reflection) {
-	return db('reflection').insert(reflection).into('reflection');
+	return db('reflection').insert(reflection, 'id');
 }
 
 function deleteReflection(id) {
