@@ -11,17 +11,17 @@ router.post('/register', (req, res) => {
 	db
 		.createUser(creds)
 		.then((res) => {
-			console.log(res);
-			db
-				.findUserId(id[0])
-				.then((user) => {
-					console.log(user);
-					const token = generateToken(user);
-					res.status(201).json({ username: user.username, token });
-				})
-				.catch((err) => {
-					res.status(500).json({ err });
-				});
+			res.status(202).json(creds);
+			// db
+			// 	.findUserId(id[0])
+			// 	.then((user) => {
+			// 		console.log(user);
+			// 		const token = generateToken(user);
+			// 		res.status(201).json({ username: user.username, token });
+			// 	})
+			// 	.catch((err) => {
+			// 		res.status(500).json({ err });
+			// 	});
 		})
 		.catch((err) => {
 			res.status(500).send('this is an error');
