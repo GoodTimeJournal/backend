@@ -77,11 +77,11 @@ router.put('/:id', authenticate, (req, res) => {
 
 	db
 		.editReflection(id, edit)
-		.then((edit) => {
-			if (edit) {
+		.then((ids) => {
+			if (ids[0]) {
 				res.status(200).json({
 					message: 'Reflection updated ',
-					reflection: edit
+					reflection: ids[0]
 				});
 			} else {
 				res.status(404).json({ errorMessage: 'That reflection seems to be missing!' });

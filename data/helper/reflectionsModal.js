@@ -25,5 +25,5 @@ function deleteReflection(id) {
 }
 
 function editReflection(id, reflection) {
-	return db('reflection').where({ id }).update(reflection);
+	return db('reflection').where({ id }).update(reflection, 'id');
 }
