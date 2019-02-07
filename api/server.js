@@ -8,6 +8,7 @@ const login = require('./login.js');
 const server = express();
 
 server.use(cors(), helmet(), express.json());
+server.options('*', cors())
 server.use('/activities', activities);
 server.use('/reflections', reflections);
 server.use('/api', login);
