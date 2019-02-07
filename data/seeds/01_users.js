@@ -6,6 +6,18 @@ exports.seed = function(knex, Promise) {
 				password: process.env.password,
 				name: 'admin',
 				email: 'admin'
+			},
+			{
+				username: 'alex',
+				password: process.env.password,
+				name: 'admin',
+				email: 'admin'
+			},
+			{
+				username: 'brandon',
+				password: process.env.password,
+				name: 'admin',
+				email: 'admin'
 			}
 		]);
 	});
