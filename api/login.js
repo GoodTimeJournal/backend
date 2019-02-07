@@ -11,6 +11,7 @@ router.post('/register', (req, res) => {
 	db
 		.createUser(creds)
 		.then((ids) => {
+			console.log(ids);
 			db
 				.findUserId(ids[0])
 				.then((user) => {
