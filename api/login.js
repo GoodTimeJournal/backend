@@ -11,11 +11,10 @@ router.post('/register', (req, res) => {
 	db
 		.createUser(creds)
 		.then((ids) => {
-			console.log(ids);
 			db
 				.findUserId(ids[0])
 				.then((user) => {
-					res.status(201).json({ username: user.username });
+					res.status(201).json({ username: user.id });
 				})
 				.catch((err) => {
 					res.status(500).json({ err });
