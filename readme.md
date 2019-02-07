@@ -24,7 +24,7 @@ The database consists of three tables (Users, Activities, and Reflections)
 
 To register a new user, send a post request to ```https://polar-plateau-24996.herokuapp.com/api/register```
 
-This register endpoints takes in four required fields:
+This register endpoint takes in four required fields:
 ```
 {
     name: string
@@ -42,7 +42,7 @@ Now you can head over to login at ```https://polar-plateau-24996.herokuapp.com/a
     password: string
 }
 ```
-<em>If correct login information is entered, you should receive back an object with your username, your id, and a token. </em>
+<em>If correct login information is entered, you should receive back an object with your username, your id, and a token.</em>
 ```
 {
     Welcome: username,
