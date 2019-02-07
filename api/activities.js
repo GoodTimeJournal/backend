@@ -38,11 +38,18 @@ router.post('/', authenticate, (req, res) => {
 	const activity = req.body;
 	db
 		.createActivity(activity)
-		.then((act) => {
-			res.status(201).json(activity);
+		.then((ids) => {
+			db
+				.getActivity(ids[0])
+				.then((activity) => {
+					res.status(201).json({ activity: activity.id });
+				})
+				.catch((err) => {
+					res.status(500).json(`Server error: ${err}`);
+				});
 		})
 		.catch((err) => {
-			res.status(500).json(`Server error: ${err}`);
+			res.status(500).json({ err });
 		});
 });
 

@@ -17,7 +17,7 @@ function getActivity(id) {
 }
 
 function createActivity(activity) {
-	return db('activity').insert(activity).into('activity');
+	return db('activity').insert(activity, 'id');
 }
 
 function deleteActivity(id) {
