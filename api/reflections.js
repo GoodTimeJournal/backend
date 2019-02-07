@@ -42,7 +42,7 @@ router.post('/', authenticate, (req, res) => {
 		.then((ids) => {
 			db
 				.getReflection(ids[0])
-				.then((user) => {
+				.then((reflection) => {
 					res.status(201).json({ reflection: reflection.id });
 				})
 				.catch((err) => {
