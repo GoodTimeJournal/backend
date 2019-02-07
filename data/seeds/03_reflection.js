@@ -12,7 +12,7 @@ exports.seed = function(knex, Promise) {
           insights: "This was a good week, it was my first week being this active and by Friday, I really felt better",
           trends: "The more exercise you do, the more exercise you want to do",
           surprises: "This was a very active week, I found that the more activity I did, the more energy I had."
-        },
+        }
       ]);
     });
 };
