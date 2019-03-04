@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
 		table.integer('enjoymentRating').notNullable();
 		table.integer('energyLevel').notNullable();
 		table.integer('engagement').notNullable();
+		table.string('url').defaultTo(null);
 		table.timestamp('timestamp').defaultTo(knex.fn.now());
 	});
 };
