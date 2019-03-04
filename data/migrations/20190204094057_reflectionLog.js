@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
 		table.text('insights').notNullable();
 		table.text('trends').notNullable();
 		table.text('surprises').notNullable();
+		table.string('url').defaultTo(null);
 		table.timestamp('timestamp').defaultTo(knex.fn.now());
 	});
 };
