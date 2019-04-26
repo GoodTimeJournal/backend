@@ -26,16 +26,6 @@ beforeAll((done) => {
     });
 });
 
-beforeAll((done) => {
-    request(app)
-    .post('/reflections')
-    .set('Authorization', `${token}`)
-    .send(testData)
-    .end((err, response) => {
-        done();
-    });
-});
-
 describe('Auth tests', () => {
 // token not being sent - should respond with a 401
     test('It should require authorization', () => {
