@@ -34,11 +34,12 @@ router.get('/:id', authenticate, (req, res) => {
 });
 
 router.post('/', authenticate, (req, res, next) => {
+	let reflection;
 	const { id, week, fk, journalEntry, insights, trends, surprises } = req.body;
 	if(req.body.id) {
-		const reflection = { id, week, fk, journalEntry, insights, trends, surprises }
+		reflection = { id, week, fk, journalEntry, insights, trends, surprises }
 	} else {
-		const reflection = { week, fk, journalEntry, insights, trends, surprises };
+		reflection = { week, fk, journalEntry, insights, trends, surprises };
 	}
 	
 	db
