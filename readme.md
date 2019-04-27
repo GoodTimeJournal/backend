@@ -13,6 +13,7 @@
 ```Navigate into the backend folder, open your terminal, and type "NPM install"```
 
 <strong>Testing endpoints</strong>
+
 ```Simply type "npm test" and the testing will begin```
 
 <strong>Start the server</strong>
