@@ -47,7 +47,7 @@ describe('Activity routes', () => {
         })
     })
 
-//  Testing Get Request for activities by ID
+// Testing Get Request for activities by ID
     test('responds with 200 at /activities/:id', () => {
         return request(app)
         .get('/activities/2111')
