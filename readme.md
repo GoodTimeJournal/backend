@@ -4,13 +4,16 @@
 
 <strong><h2>Setup</h2></strong>
 
-<em>Let's get started </em>
+<em>Let's get started</em>
 
 ```Download the repo, clone, and install into the directory of your choice```
 
-<strong>Install dependencies </strong>
+<strong>Install dependencies</strong>
 
 ```Navigate into the backend folder, open your terminal, and type "NPM install"```
+
+<strong>Testing endpoints</strong>
+```Simply type "npm test" and the testing will begin```
 
 <strong>Start the server</strong>
 
