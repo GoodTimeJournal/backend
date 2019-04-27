@@ -24,7 +24,7 @@ beforeAll((done) => {
     });
 });
 
-// Testing Get request for activity
+// Testing Get request for activities
 describe('Activity routes', () => {
     test('responds with 200 at get /activities', () => {
         return request(app)
@@ -64,17 +64,25 @@ describe('Activity routes', () => {
         .set('Authorization', `${token}`)
         .send({
             "id": 2111,
-            "week": "Three",
+            "name": "TestChanged",
             "fk": 1,
-            "journalEntry": "test",
-            "insights": "test",
-            "trends": "test",
-            "surprises": "test",
-            "url": null
+            "enjoymentRating": 1,
+            "energyLevel": 1,
+            "engagement": 1
         })
         .then(response => {
             expect(response.statusCode).toBe(200)
             expect(response.body.message).toBe("Activity updated")
+        })
+    })
+
+// Testing Get Request for activities by ID on updated
+    test('responds with 200 at /activities/:id', () => {
+        return request(app)
+        .get('/activities/2111')
+        .set('Authorization', `${token}`)
+        .then(response => {
+            expect(response.body.name).toBe('TestChanged')
         })
     })
 

@@ -48,7 +48,7 @@ describe('Auth tests', () => {
     });
 });
 
-// Testing Get request for reflections
+// Testing Get for reflections
 describe('Reflection routes', () => {
     test('responds with 200 at get /reflections', () => {
         return request(app)
@@ -88,7 +88,7 @@ describe('Reflection routes', () => {
         .set('Authorization', `${token}`)
         .send({
             "id": 2111,
-            "week": "Three",
+            "week": "TwoChanged",
             "fk": 1,
             "journalEntry": "test",
             "insights": "test",
@@ -99,6 +99,16 @@ describe('Reflection routes', () => {
         .then(response => {
             expect(response.statusCode).toBe(200)
             expect(response.body.message).toBe("Reflection updated")
+        })
+    })
+
+// Testing Get for reflection by ID on updated
+    test('responds with 200 at /reflections/:id', () => {
+        return request(app)
+        .get('/reflections/2111')
+        .set('Authorization', `${token}`)
+        .then(response => {
+            expect(response.body.week).toBe('TwoChanged')
         })
     })
 
