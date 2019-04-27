@@ -72,7 +72,7 @@ router.put('/:id', authenticate, (req, res, next) => {
 		.then((ids) => {
 			if (ids) {
 				res.status(200).json({
-					message: 'Activity updated ',
+					message: 'Activity updated',
 					activity: ids[0]
 				});
 			} else {

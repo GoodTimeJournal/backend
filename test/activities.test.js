@@ -3,13 +3,11 @@ const app = ('https://polar-plateau-24996.herokuapp.com');
 const db = require('../data/helper/config.js');
 const testData = {
                 "id": 2111,
-                "week": "Two",
+                "name": "Test",
                 "fk": 1,
-                "journalEntry": "test",
-                "insights": "test",
-                "trends": "test",
-                "surprises": "test",
-                "url": null
+                "enjoymentRating": 3,
+                "energyLevel": 2,
+                "engagement": 2
             }
 
 // Login first to satisfy authorization requirements
@@ -26,33 +24,11 @@ beforeAll((done) => {
     });
 });
 
-describe('Auth tests', () => {
-// token not being sent - should respond with a 401
-    test('It should require authorization', () => {
+// Testing Get request for activity
+describe('Activity routes', () => {
+    test('responds with 200 at get /activities', () => {
         return request(app)
-        .get('/reflections')
-        .then((response) => {
-            expect(response.statusCode).toBe(401);
-        });
-    });
-
-// send the token - should respond with a 200
-    test('It responds with JSON', () => {
-        return request(app)
-        .get('/')
-        .set('Authorization', `${token}`)
-        .then((response) => {
-            expect(response.statusCode).toBe(200);
-            expect(response.type).toBe('text/html');
-        });
-    });
-});
-
-// Testing Get request for reflections
-describe('Reflection routes', () => {
-    test('responds with 200 at get /reflections', () => {
-        return request(app)
-        .get('/reflections')
+        .get('/activities')
         .set('Authorization', `${token}`)
         .then(response => {
             expect(response.statusCode).toBe(200)
@@ -60,10 +36,10 @@ describe('Reflection routes', () => {
         })
     });
 
-// Testing Post for reflections
-    test('responds with 201 at post /reflections', () => {
+// Testing Post for activities
+    test('responds with 201 at post /activities', () => {
         return request(app)
-        .post('/reflections')
+        .post('/activities')
         .set('Authorization', `${token}`)
         .send(testData)
         .then(response => {
@@ -71,20 +47,20 @@ describe('Reflection routes', () => {
         })
     })
 
-//  Testing Get Request for reflections by ID
-    test('responds with 200 at /reflections/:id', () => {
+//  Testing Get Request for activities by ID
+    test('responds with 200 at /activities/:id', () => {
         return request(app)
-        .get('/reflections/2111')
+        .get('/activities/2111')
         .set('Authorization', `${token}`)
         .then(response => {
             expect(response.statusCode).toBe(200)
         })
     })
 
-// Testing Put for reflections
-    test('responds with 200 at put /reflections/:id', () => {
+// Testing Put for activities
+    test('responds with 200 at put /activities/:id', () => {
         return request(app)
-        .put('/reflections/2111')
+        .put('/activities/2111')
         .set('Authorization', `${token}`)
         .send({
             "id": 2111,
@@ -98,18 +74,18 @@ describe('Reflection routes', () => {
         })
         .then(response => {
             expect(response.statusCode).toBe(200)
-            expect(response.body.message).toBe("Reflection updated")
+            expect(response.body.message).toBe("Activity updated")
         })
     })
 
-// Testing Delete for reflections
-    test('responds with 202 at delete /reflections/:id', () => {
+// Testing Delete for activities
+    test('responds with 202 at delete /activities/:id', () => {
         return request(app)
-        .delete('/reflections/2111')
+        .delete('/activities/2111')
         .set('Authorization', `${token}`)
         .then(response => {
             expect(response.statusCode).toBe(202)
-            expect(response.body.message).toBe("Reflection deleted")
+            expect(response.body.message).toBe("Activity deleted")
         })
     })
 })
