@@ -55,7 +55,6 @@ describe('Reflection routes', () => {
         .get('/reflections')
         .set('Authorization', `${token}`)
         .then(response => {
-            console.log(response.body)
             expect(response.statusCode).toBe(200)
             expect(response.body).toBeInstanceOf(Array)
         })
